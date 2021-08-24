@@ -1,13 +1,15 @@
 import React, { Component } from 'react'
-import { BrowserRouter, Switch, Route, NavLink, Redirect } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import Home from './Home';
 import Header from './Header';
 import Auth from './Auth';
+import ToDos from './ToDos.js';
 class App extends Component {
   state = { 
-    email: '',
-    password: '',
-    type: '',
+    token: localStorage.getItem('TOKEN')
+  }
+  setToken = (value) => {
+    this.setState({ token: value })
   }
   render() { 
     return (  
@@ -36,8 +38,16 @@ class App extends Component {
                 />
               )}
             />
-            {/* //TODO
-            write /todos path */}
+            <Route
+              path='/todos'
+              render={(routerProps) =>
+                this.state.token ? (
+                  <ToDos {...routerProps} />
+                ) : (
+                  <Redirect to='/signin' />
+                )
+              }
+            />
           </Switch>
         </BrowserRouter>
       </section>
