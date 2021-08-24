@@ -8,7 +8,7 @@ class Header extends Component {
                 <div className='links'>
                     <NavLink activeClassName='selected' exact to='/'>Home</NavLink>
                     <NavLink activeClassName='selected' to='/signup'>Signup</NavLink>
-                    <NavLink activeClassName='selected' to='/login'>Login</NavLink>
+                    <NavLink activeClassName='selected' to='/signin'>Signin</NavLink>
                 </div>
             </header>
         );
