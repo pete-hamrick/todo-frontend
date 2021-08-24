@@ -10,6 +10,6 @@ export async function getToken(loginInfo, type) {
         body: JSON.stringify(loginInfo),
     });
     const data = await resp.json();
-    localStorage.setItem('Token', data.token)
+    localStorage.setItem('TOKEN', data.token)
     return data.token;
 }
