@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-//TODO
-//flesh out handleSubmit to get the token from fetch-utils
+import { getToken } from './fetch-utils.js';
 
 class Auth extends Component {
     state = { 
@@ -12,6 +11,15 @@ class Auth extends Component {
     }
     handleSubmit = async (e) => {
         e.preventDefault();
+        const token = await getToken(
+            {
+                email: this.state.email,
+                password: this.state.password,
+            },
+            this.props.type
+        )
+        this.props.setToken(token);
+        this.props.history.push('/todos')
     }
     render() { 
         return ( 
@@ -19,7 +27,7 @@ class Auth extends Component {
                 <h1>{this.getType()}</h1>
                 <form onSubmit={this.handleSubmit}>
                     <fieldset>
-                        <legend>{this.props.type}</legend>
+                        <legend>{this.getType()}</legend>
 
                         <label>Email: </label>
                         <input 

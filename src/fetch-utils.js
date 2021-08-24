@@ -1,4 +1,4 @@
-const URL = 'http://localHost:7890';
+const URL = 'https://serene-depths-49645.herokuapp.com';
 
 export async function getToken(loginInfo, type) {
     const authURL = `${URL}/auth/${type}`;
