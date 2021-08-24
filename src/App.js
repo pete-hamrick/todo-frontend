@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import Home from './Home'
-import Signup from './Signup';
-import Login from './Login';
+import { BrowserRouter, Switch, Route, NavLink, Redirect } from 'react-router-dom';
+import Home from './Home';
 import Header from './Header';
+import Auth from './Auth';
 class App extends Component {
   state = { 
     email: '',
@@ -17,8 +16,28 @@ class App extends Component {
           <Header />
           <Switch>
             <Route exact path='/' component={Home} />
-            <Route path='/signup' component={Signup} />
-            <Route path='/login' component={Login} />
+            <Route 
+              path='/signin'
+              render={(routerProps) => (
+                <Auth
+                  setToken={this.setToken}
+                  type='signin'
+                  {...routerProps}
+                />
+              )}
+            />
+            <Route 
+              path='/signup'
+              render={(routerProps) => (
+                <Auth
+                setToken={this.setToken}
+                  type='signup'
+                  {...routerProps}
+                />
+              )}
+            />
+            {/* //TODO
+            write /todos path */}
           </Switch>
         </BrowserRouter>
       </section>
