@@ -1,0 +1,14 @@
+header {
+    height: 100px;
+}
+
+.links {
+    display: flex;
+    flex-direction: column;
+    margin-left: 25px;
+}
+
+.selected {
+    text-decoration: none;
+    font-weight: bold;
+}
