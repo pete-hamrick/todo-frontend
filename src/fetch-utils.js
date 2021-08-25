@@ -13,3 +13,21 @@ export async function getToken(loginInfo, type) {
     localStorage.setItem('TOKEN', data.token)
     return data.token;
 }
+
+export async function getToDos() {
+    const apiURL = `${URL}/api/todos`;
+    const token = localStorage.getItem('TOKEN')
+    const resp = await fetch(apiURL, {
+        method: 'GET',
+        headers: {
+            'Authorization': token,
+        }
+    })
+    const data = await resp.json();
+    return data;
+}
+
+//TODO
+//getToDos function GET to /api/todos
+//createToDo function POST to /api/todos
+//updateToDo(id) function PUT to /api/todos/${id}

@@ -1,10 +1,24 @@
 import React, { Component } from 'react';
-
+import { getToDos } from './fetch-utils';
+//TODO
+//write how a todo appears on the page
 class ToDos extends Component {
-    state = {  }
+    state = { 
+        todos: [],
+    }
+    componentDidMount = async () => {
+        const data = await getToDos();
+        this.setState({ todos: data });
+    }
     render() { 
         return ( 
-            <h1>My To Dos:</h1>
+            <ul className='todos'>
+                {this.state.todos.map(todo => (
+                    <li>
+                        {todo.todo}
+                    </li>
+                ))}
+            </ul>
         );
     }
 }
