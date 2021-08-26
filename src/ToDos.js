@@ -19,7 +19,7 @@ class ToDos extends Component {
 
     handleAddToDo = async (e) => {
         e.preventDefault();
-        const data = await createToDo(this.props.token, {
+        await createToDo(this.props.token, {
             todo: this.state.new_todo,
             completed: false,
         });
@@ -29,7 +29,7 @@ class ToDos extends Component {
 
     handleCompleted = async (todo) => {
         todo.completed = !todo.completed;
-        const data = await updateToDo(this.props.token, todo);
+        await updateToDo(this.props.token, todo);
         this.fetchToDos();
     }
     render() { 
