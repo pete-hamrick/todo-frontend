@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, Redirect, NavLink } from 'react-router-dom';
 import Home from './Home';
-import Header from './Header';
+import './Header.css';
+import './App.css';
 import Auth from './Auth';
 import ToDos from './ToDos.js';
 class App extends Component {
@@ -15,7 +16,20 @@ class App extends Component {
     return (  
       <section>
         <BrowserRouter>
-          <Header />
+          <header>
+                <div className='links'>
+                    <NavLink activeClassName='selected' exact to='/'>Home</NavLink>
+                    {this.state.token && (
+                        <NavLink activeClassName='selected' to='/todos'>To Do List</NavLink>
+                    )}
+                    {!this.state.token && (
+                        <>
+                            <NavLink activeClassName='selected' to='/signup'>Signup</NavLink>
+                            <NavLink activeClassName='selected' to='/signin'>Signin</NavLink>
+                        </>
+                    )}
+                </div>
+            </header>
           <Switch>
             <Route exact path='/' component={Home} />
             <Route 
@@ -42,7 +56,10 @@ class App extends Component {
               path='/todos'
               render={(routerProps) =>
                 this.state.token ? (
-                  <ToDos {...routerProps} />
+                  <ToDos 
+                    token={this.state.token}
+                    {...routerProps} 
+                  />
                 ) : (
                   <Redirect to='/signin' />
                 )
