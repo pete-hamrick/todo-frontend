@@ -19,11 +19,13 @@ class ToDos extends Component {
 
 
     handleAddToDo = async (e) => {
-        e.preventDefault(); //tried not using e.preventDefault() but it reloads the page, tried to push to /api/todos but not working
-        const newToDo = await createToDo(this.state.new_todo)
-        this.setState({ todos: [...this.state.todos, ...newToDo], new_todo: ''});
-        this.props.history.push(`${URL}/api/todos`)
-        //errors out but then loads? says uncaught in promise type error newToDo is not iterable at todos.handleAddToDo
+        e.preventDefault();
+        const data = await createToDo(this.props.token, {
+            todo: this.state.new_todo,
+            completed: false,
+        });
+        this.setState({ new_todo: '' });
+        this.fetchToDos();
     }
     render() { 
         return ( 

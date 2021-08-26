@@ -14,32 +14,28 @@ export async function getToken(loginInfo, type) {
     return data.token;
 }
 
-export async function getToDos() {
+export async function getToDos(token) {
     const apiURL = `${URL}/api/todos`;
-    const token = localStorage.getItem('TOKEN')
     const resp = await fetch(apiURL, {
         method: 'GET',
         headers: {
+            'Content-Type': 'application/json',
             'Authorization': token,
-        }
-    })
+        },
+    });
     const data = await resp.json();
     return data;
 }
 
-export async function createToDo(todo) {
+export async function createToDo(token, todo) {
     const apiURL = `${URL}/api/todos`;
-    const token = localStorage.getItem('TOKEN')
     const resp = await fetch(apiURL, {
         method: 'POST',
         headers: {
-            'Authorization': token,
             'Content-Type': 'application/json',
+            'Authorization': token,
         },
-        body: JSON.stringify({
-            todo: todo,
-            completed: false,
-        })
+        body: JSON.stringify(todo)
     });
     const data = await resp.json();
     return data;
