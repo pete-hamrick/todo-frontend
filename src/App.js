@@ -12,15 +12,20 @@ class App extends Component {
   setToken = (value) => {
     this.setState({ token: value })
   }
+  handleLogout = () => {
+    localStorage.removeItem('TOKEN')
+    window.location.replace('/')
+  }
   render() { 
     return (  
       <section>
         <BrowserRouter>
           <header>
                 <div className='links'>
+                    <button onClick={this.handleLogout}>Log Out</button>
                     <NavLink activeClassName='selected' exact to='/'>Home</NavLink>
                     {this.state.token && (
-                        <NavLink activeClassName='selected' to='/todos'>To Do List</NavLink>
+                      <NavLink activeClassName='selected' to='/todos'>To Do List</NavLink>
                     )}
                     {!this.state.token && (
                         <>
