@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { createToDo, getToDos } from './fetch-utils';
+import { createToDo, getToDos, updateToDo } from './fetch-utils';
 import { URL } from './fetch-utils.js'
 
 class ToDos extends Component {
@@ -27,14 +27,25 @@ class ToDos extends Component {
         this.setState({ new_todo: '' });
         this.fetchToDos();
     }
+
+    handleCompleted = async (todo) => {
+        todo.completed = !todo.completed;
+        const data = await updateToDo(this.props.token, todo);
+        this.fetchToDos();
+    }
     render() { 
         return ( 
             <>
                 <section className='todo-list'>
                     <article className='todos'>
                         {this.state.todos.map(todo => (
-                            <div key={todo.id}>
-                                <input id={todo.id} type='checkbox'></input>
+                            <div className='todo-item' key={todo.id}>
+                                <input 
+                                    id={todo.id} 
+                                    type='checkbox'
+                                    checked={todo.completed}
+                                    onChange={() => this.handleCompleted(todo)}
+                                    ></input>
                                 <label for={todo.id}>{todo.todo}</label>
                             </div>
                         ))}

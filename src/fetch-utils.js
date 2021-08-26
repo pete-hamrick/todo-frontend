@@ -41,27 +41,17 @@ export async function createToDo(token, todo) {
     return data;
 }
 
-export async function updateToDo(id, todo){
-    const apiURL = `${URL}/api/todos/${id}`;
-    const token = localStorage.getItem('TOKEN')
+export async function updateToDo(token, todo){
+    const apiURL = `${URL}/api/todos/${todo.id}`;
     const resp = await fetch(apiURL, {
         method: 'PUT',
         headers: {
             'Authorization': token,
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-            todo: todo,
-            completed: true,
-        })
+        body: JSON.stringify(todo)
     });
     const data = await resp.json();
     return data;
 }
 
-
-
-//TODO
-// //getToDos function GET to /api/todos
-// //createToDo function POST to /api/todos
-//updateToDo(id) function PUT to /api/todos/${id}
