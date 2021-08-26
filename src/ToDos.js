@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { createToDo, getToDos, updateToDo } from './fetch-utils';
-import { URL } from './fetch-utils.js'
-
+import './ToDos.css';
 class ToDos extends Component {
     state = { 
         todos: [],
@@ -37,6 +36,7 @@ class ToDos extends Component {
         return ( 
             <>
                 <section className='todo-list'>
+                    <h1>My To Do List</h1>
                     <article className='todos'>
                         {this.state.todos.map(todo => (
                             <div className='todo-item' key={todo.id}>
@@ -46,7 +46,7 @@ class ToDos extends Component {
                                     checked={todo.completed}
                                     onChange={() => this.handleCompleted(todo)}
                                     ></input>
-                                <label for={todo.id}>{todo.todo}</label>
+                                <label htmlFor={todo.id}>{todo.todo}</label>
                             </div>
                         ))}
                     </article>

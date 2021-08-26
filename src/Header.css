@@ -1,11 +1,17 @@
 header {
     height: 100px;
+    background-color: rgb(134, 121, 121);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: 0 5px 5px grey;
 }
 
 .links {
     display: flex;
-    flex-direction: column;
     margin-left: 25px;
+    justify-content: space-evenly;
+    align-content: flex-end;
 }
 
 .selected {
