@@ -42,7 +42,10 @@ class App extends Component {
               path='/todos'
               render={(routerProps) =>
                 this.state.token ? (
-                  <ToDos {...routerProps} />
+                  <ToDos 
+                    token={this.state.token}
+                    {...routerProps} 
+                  />
                 ) : (
                   <Redirect to='/signin' />
                 )

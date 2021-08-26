@@ -1,24 +1,22 @@
 import React, { Component } from 'react';
 import { createToDo, getToDos } from './fetch-utils';
 import { URL } from './fetch-utils.js'
-//TODO
-// //write how a todo appears on the page
-//make form submit work to add new todo
-//style li to cross out when clicked
+
 class ToDos extends Component {
     state = { 
         todos: [],
         new_todo: '',
 
     }
-    componentDidMount = async () => {
-        const data = await getToDos();
-        this.setState({ todos: data });
+    componentDidMount = () => {
+        this.fetchToDos();
     }
-    //have component did mount just be...
-    //put getTodos in fetch todos async function
-    //gettodos in the fetch-utils file
-    //set the todos in state
+
+    fetchToDos = async () => {
+        const data = await getToDos(this.props.token);
+        this.setState({todos: data});
+    }
+
 
     handleAddToDo = async (e) => {
         e.preventDefault(); //tried not using e.preventDefault() but it reloads the page, tried to push to /api/todos but not working
